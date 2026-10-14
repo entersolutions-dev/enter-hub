@@ -1,3 +1,5 @@
+name: Deploy to cPanel (E-Nova Host)
+
 on:
   push:
     branches:
@@ -6,41 +8,33 @@ on:
 
 jobs:
   web-deploy:
-    name: Deploy to cPanel (E-Nova Host)
     runs-on: ubuntu-latest
-
     steps:
-      - name: 🚚 Sync Repository
+      - name: 🚚 Checkout Code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: 🔍 Determine Target Directory
+      - name: 📁 Determine Target Directory
         id: target
         run: |
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
-            echo "dir=/public_html/" >> $GITHUB_OUTPUT
+            echo "dir=public_html" >> $GITHUB_OUTPUT
             echo "env=Production" >> $GITHUB_OUTPUT
           else
-            echo "dir=/public_html/dev/" >> $GITHUB_OUTPUT
+            echo "dir=public_html/dev" >> $GITHUB_OUTPUT
             echo "env=Staging" >> $GITHUB_OUTPUT
           fi
 
-      - name: 🚀 Deploy via FTP/SFTP
+      - name: 📂 Deploy via FTP
         uses: SamKirsch/ftp-deploy-action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           port: ${{ secrets.FTP_PORT || 21 }}
-          server-dir: ${{ steps.target.outputs.dir }}
+          server-dir: ${{ steps.target.outputs.dir }}/
           dry-run: false
           exclude: |
             **/.git*
             **/.git*/**
+            **/.vscode/**
             **/node_modules/**
-            **/config.php
-            **/.env
-            **/README.md
-            **/scratch/**
-            **/out/**
