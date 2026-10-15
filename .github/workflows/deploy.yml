@@ -38,3 +38,4 @@ jobs:
             **/.git*/**
             **/.vscode/**
             **/node_modules/**
+            **/nothing/**
