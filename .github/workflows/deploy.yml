@@ -24,8 +24,8 @@ jobs:
             echo "env=Staging" >> $GITHUB_OUTPUT
           fi
 
-      - name: 📂 Deploy via FTP
-        uses: SamKirsch/ftp-deploy-action@v4.3.5
+      - name: 📂 Deploy via FTP        
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
@@ -38,3 +38,4 @@ jobs:
             **/.git*/**
             **/.vscode/**
             **/node_modules/**
+            **/nothing/**
