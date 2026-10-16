@@ -7,34 +7,39 @@ on:
       - dev
 
 jobs:
-  web-deploy:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: 🚚 Checkout Code
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: 📁 Determine Target Directory
-        id: target
+      - name: Set Environment Variables based on Branch
+        id: set-env
         run: |
-          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
-            echo "dir=public_html" >> $GITHUB_OUTPUT
-            echo "env=Production" >> $GITHUB_OUTPUT
+          if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+            echo "ENV_NAME=production" >> $GITHUB_ENV
+            echo "TARGET_DIR=/home/entersol/public_html/" >> $GITHUB_ENV
+            echo "SUBDOMAIN_TARGETS=academia.entersolutions.co consultoria.entersolutions.co ia.entersolutions.co suministros.entersolutions.co" >> $GITHUB_ENV
           else
-            echo "dir=public_html/dev" >> $GITHUB_OUTPUT
-            echo "env=Staging" >> $GITHUB_OUTPUT
+            echo "ENV_NAME=development" >> $GITHUB_ENV
+            echo "TARGET_DIR=/home/entersol/dev.entersolutions.co/" >> $GITHUB_ENV
+            echo "SUBDOMAIN_TARGETS=academia-test.entersolutions.co consultoria-test.entersolutions.co ia-test.entersolutions.co suministros-test.entersolutions.co" >> $GITHUB_ENV
           fi
 
-      - name: 📂 Deploy via FTP
-        uses: SamKirkland/ftp-deploy-action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          port: ${{ secrets.FTP_PORT || 21 }}
-          server-dir: ${{ steps.target.outputs.dir }}/
-          dry-run: false
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/.vscode/**
-            **/node_modules/**
+      - name: Print Deployment Info
+        run: |
+          echo "Desplegando en modo: ${{ env.ENV_NAME }}"
+          echo "Directorio Raíz destino: ${{ env.TARGET_DIR }}"
+          echo "Subdominios destino: ${{ env.SUBDOMAIN_TARGETS }}"
+
+      # Opcional: Aquí puedes agregar los pasos de sincronización vía FTP/SFTP o cPanel API
+      # Ejemplo usando FTP (asegúrate de configurar tus Secrets en GitHub):
+      # - name: Deploy via FTP
+      #   uses: SamKirkland/FTP-Deploy-Action@v4
+      #   with:
+      #     server: ${{ secrets.FTP_SERVER }}
+      #     username: ${{ secrets.FTP_USERNAME }}
+      #     password: ${{ secrets.FTP_PASSWORD }}
+      #     local-dir: ./
+      #     server-dir: ${{ env.TARGET_DIR }}
