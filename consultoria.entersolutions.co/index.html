@@ -4,6 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>[HUB-OPS] Consultoría Operativa & Diagnóstico RISEN | Enter Solutions S.A.S.</title>
+    <!-- 
+      ==============================================================================
+      ENTER SOLUTIONS S.A.S. — ENTER-HUB
+      Holding de arquitectura empresarial, desarrollo de software e inteligencia artificial.
+      Soluciones corporativas para la optimización operativa de pequeñas y medianas empresas.
+      ==============================================================================
+      Archivo: index.html
+      Módulo: [HUB-OPS] Consultoría Operativa (consultoria.entersolutions.co)
+      Versión: v1.1
+      Fecha y Hora de Generación: 15 de Octubre de 2026, 19:47 -05:00
+      Autoría y Derechos Reservados: © 2026 Enter Solutions S.A.S. Todos los derechos reservados.
+      ==============================================================================
+    -->
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -186,6 +199,14 @@
                         <textarea id="mensaje" rows="3" required class="w-full bg-slateNocturno border border-slateBorder rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-naranjaElectrico" placeholder="Describe brevemente el proceso o área con problemas de eficiencia..."></textarea>
                     </div>
 
+                    <!-- Módulo de Consentimiento Habeas Data (REG-LEG-01) -->
+                    <div class="flex items-start gap-2 pt-2 text-xs text-slate-400">
+                        <input type="checkbox" id="aceptaHabeasData" name="habeas_data" required class="mt-0.5 rounded bg-slate-900 border-slate-700 text-orange-500 focus:ring-0">
+                        <label for="aceptaHabeasData" class="leading-tight">
+                            Acepto la <a href="https://entersolutions.co/legal/politica-datos.html" target="_blank" rel="noopener noreferrer" class="text-naranjaElectrico underline hover:text-orange-400">Política de Tratamiento de Datos Personales</a> de Enter Solutions S.A.S. (Ley 1581 de 2012) para solicitudes y atención Corporativa.
+                        </label>
+                    </div>
+
                     <button type="submit" id="btnSubmit" class="w-full bg-naranjaElectrico hover:bg-orange-600 text-white font-bold py-3 rounded-lg shadow-lg shadow-naranjaElectrico/20 transition-all text-xs uppercase tracking-wider flex items-center justify-center gap-2">
                         <i class="fa-solid fa-paper-plane"></i> Enviar Formulario de Diagnóstico
                     </button>
@@ -224,7 +245,9 @@
                     cargo: payloadData.cargo || "",
                     email: payloadData.email || "",
                     telefono: payloadData.telefono || "",
-                    mensaje: payloadData.mensaje || ""
+                    mensaje: payloadData.mensaje || "",
+                    habeas_data_aceptado: true,
+                    timestamp_consentimiento: new Date().toISOString()
                 };
 
                 const response = await fetch(endpoint, {
@@ -258,6 +281,13 @@
         function procesarFormularioConsultoria(event) {
             event.preventDefault();
             const form = event.target;
+            const habeasCheck = document.getElementById('aceptaHabeasData');
+            
+            if (habeasCheck && !habeasCheck.checked) {
+                alert("⚠️ Debe aceptar la Política de Tratamiento de Datos Personales para continuar.");
+                return;
+            }
+
             const payload = {
                 origen: "consultoria.entersolutions.co",
                 modulo: "HUB-OPS",
