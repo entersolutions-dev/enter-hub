@@ -1,0 +1,248 @@
+<!--
+============================================================================
+ENTER SOLUTIONS S.A.S. - ECOSISTEMA ENTER-HUB
+============================================================================
+@file        index.html (HUB-SUPPLY: Suministros Corporativos B2B)
+@package     EnterHub\Frontend\Suministros
+@version     1.3.0-environment-aware
+@description Landing page corporativa con autoconfiguración de entorno (Test/Prod)
+             y enrutamiento asíncrono hacia la API centralizada de procesamiento.
+============================================================================
+-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suministros Corporativos B2B | ENTER-HUB</title>
+    <!-- Estilos base corporativos: Azul Cobalto (#0052CC) y Naranja Eléctrico (#FF6B00) -->
+    <style>
+        :root {
+            --primary-color: #0052CC;
+            --accent-color: #FF6B00;
+            --bg-color: #F8F9FA;
+            --text-color: #333333;
+        }
+        body {
+            font-family: Arial, sans-serif, -apple-system, BlinkMacSystemFont;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.15;
+        }
+        header {
+            background-color: #ffffff;
+            border-bottom: 2px solid #eaeaea;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+        p.subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        input:focus, textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #003d99;
+        }
+        #status-message {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 4px;
+            display: none;
+            font-weight: bold;
+            text-align: center;
+        }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.85rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>ENTER-HUB | Suministros Corporativos B2B</h1>
+        <span id="env-badge" style="font-size: 0.8rem; padding: 4px 8px; border-radius: 4px; background: #e2e8f0; color: #475569;">Cargando entorno...</span>
+    </header>
+
+    <div class="container">
+        <h2>Abastecimiento y Proveeduría Tecnológica</h2>
+        <p class="subtitle">Gestión eficiente de suministros corporativos, hardware y dotación tecnológica para empresas.</p>
+
+        <form id="formContacto">
+            <div class="form-group">
+                <label for="nombre">Nombre Completo:</label>
+                <input type="text" id="nombre" name="nombre" required placeholder="Ej. Juan Carlos García">
+            </div>
+
+            <div class="form-group">
+                <label for="empresa">Empresa:</label>
+                <input type="text" id="empresa" name="empresa" required placeholder="Ej. Enter Solutions S.A.S.">
+            </div>
+
+            <div class="form-group">
+                <label for="cargo">Cargo / Rol:</label>
+                <input type="text" id="cargo" name="cargo" placeholder="Ej. Gerente de Compras">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Correo Electrónico Corporativo:</label>
+                <input type="email" id="email" name="email" required placeholder="correo@empresa.com">
+            </div>
+
+            <div class="form-group">
+                <label for="telefono">Teléfono / WhatsApp (para ID Maestro E.164):</label>
+                <input type="tel" id="telefono" name="telefono" required placeholder="+573001234567">
+            </div>
+
+            <div class="form-group">
+                <label for="mensaje">Describa los suministros o requerimiento de cotización:</label>
+                <textarea id="mensaje" name="mensaje" rows="4" required placeholder="Detalle los productos, cantidades y referencias requeridas..."></textarea>
+            </div>
+
+            <button type="submit" id="btnEnviar">Solicitar Cotización de Suministros</button>
+        </form>
+
+        <div id="status-message"></div>
+    </div>
+
+    <footer>
+        &copy; 2026 ENTER SOLUTIONS S.A.S. - Todos los derechos reservados.
+    </footer>
+
+    <!-- Lógica de Autoconfiguración y Envío Asíncrono a la API Centralizada -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const currentHost = window.location.hostname;
+            const isTestEnv = currentHost.includes('-test') || currentHost.includes('localhost') || currentHost.includes('127.0.0.1');
+            
+            // Actualización visual del indicador de entorno en la cabecera
+            const badge = document.getElementById('env-badge');
+            if (isTestEnv) {
+                badge.textContent = "MODO: TEST / DEV";
+                badge.style.background = "#fef3c7";
+                badge.style.color = "#d97706";
+            } else {
+                badge.textContent = "MODO: PRODUCCIÓN";
+                badge.style.background = "#dcfce7";
+                badge.style.color = "#15803d";
+            }
+        });
+
+        document.getElementById('formContacto').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const btnEnviar = document.getElementById('btnEnviar');
+            const statusDiv = document.getElementById('status-message');
+            
+            btnEnviar.disabled = true;
+            btnEnviar.textContent = "Procesando...";
+            statusDiv.style.display = 'none';
+
+            const currentHost = window.location.hostname;
+            
+            // Endpoint fijo centralizado en la API de public_html/api
+            const apiEndpoint = 'https://entersolutions.co/api/api-procesar.php';
+
+            const payload = {
+                nombre: document.getElementById('nombre').value,
+                empresa: document.getElementById('empresa').value,
+                cargo: document.getElementById('cargo').value,
+                email: document.getElementById('email').value,
+                telefono: document.getElementById('telefono').value,
+                mensaje: document.getElementById('mensaje').value,
+                origen: currentHost, // Identifica automáticamente si vino de suministros.entersolutions.co o suministros-test...
+                touchpoint: 'contacto_suministros_web',
+                canal_origen: 'web_landing_hub_supply'
+            };
+
+            try {
+                const response = await fetch(apiEndpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-ENTER-API-KEY': 'ENTER_HUB_API_KEY_2026'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const resultado = await response.json();
+
+                statusDiv.style.display = 'block';
+                if (response.ok && resultado.status === 'success') {
+                    statusDiv.className = 'success';
+                    statusDiv.textContent = '¡Cotización solicitada con éxito! Su requerimiento ha sido enrutado correctamente.';
+                    document.getElementById('formContacto').reset();
+                } else {
+                    statusDiv.className = 'error';
+                    statusDiv.textContent = 'Error: ' + (resultado.error_detalle || resultado.message || 'No se pudo procesar la solicitud.');
+                }
+            } catch (error) {
+                console.error('Error de red:', error);
+                statusDiv.style.display = 'block';
+                statusDiv.className = 'error';
+                statusDiv.textContent = 'Ocurrió un error de conexión al intentar comunicarse con el servidor.';
+            } finally {
+                btnEnviar.disabled = false;
+                btnEnviar.textContent = 'Solicitar Cotización de Suministros';
+            }
+        });
+    </script>
+</body>
+</html>
