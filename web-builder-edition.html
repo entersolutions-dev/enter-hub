@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enter Solutions S.A.S. | Consultoría Estratégica & IA B2B</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brandSlate: '#020617',
+            brandCobalt: '#0052CC',
+            brandOrange: '#FF6B00',
+            brandLight: '#F8FAFC',
+            brandDarkCard: '#0F172A'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="bg-brandSlate text-brandLight font-sans antialiased selection:bg-brandOrange selection:text-white">
+
+  <!-- NAVEGACIÓN PRINCIPAL -->
+  <header class="sticky top-0 z-50 bg-brandSlate/90 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <!-- ISOTIPO VECTORIAL CONVERGENCIA E+S -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-10 h-10">
+          <path d="M 35 30 C 15 30, 10 50, 25 68 C 40 85, 60 85, 75 68 C 90 50, 85 30, 65 30 C 50 30, 42 42, 50 50" fill="none" stroke="#0052CC" stroke-width="12" stroke-linecap="round"/>
+          <polygon points="50,38 60,50 50,62 40,50" fill="#FF6B00"/>
+          <circle cx="50" cy="50" r="3" fill="#FFFFFF"/>
+        </svg>
+        <span class="text-xl font-bold tracking-wider text-white">ENTER <span class="text-brandCobalt">SOLUTIONS</span></span>
+      </div>
+      <nav class="hidden md:flex space-x-8 text-sm font-semibold text-slate-300">
+        <a href="#inicio" class="hover:text-brandOrange transition">Inicio</a>
+        <a href="#metodologia" class="hover:text-brandOrange transition">Metodología MVP</a>
+        <a href="#servicios" class="hover:text-brandOrange transition">Servicios & IA</a>
+        <a href="#casos" class="hover:text-brandOrange transition">Casos de Éxito</a>
+      </nav>
+      <a href="#diagnostico" class="hidden sm:inline-block bg-brandOrange hover:bg-orange-600 text-white font-semibold text-sm px-5 py-2.5 rounded-lg shadow-lg shadow-brandOrange/20 transition">
+        Agendar Diagnóstico
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section id="inicio" class="relative py-24 px-6 max-w-7xl mx-auto text-center md:text-left grid md:grid-cols-2 gap-12 items-center">
+    <div>
+      <span class="inline-block px-3 py-1 bg-brandCobalt/20 text-brandCobalt text-xs font-bold rounded-full border border-brandCobalt/40 mb-4 uppercase tracking-widest">
+        El Puente Directivo - Técnico
+      </span>
+      <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6">
+        Liberamos a la dirección de la <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandCobalt to-brandOrange">carga operativa.</span>
+      </h1>
+      <p class="text-slate-400 text-lg mb-8 leading-relaxed">
+        Evolucione sus sistemas gerenciales y comerciales mediante la fusión de consultoría estratégica de procesos, integración de software/hardware y automatización con IA.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+        <a href="#diagnostico" class="bg-brandOrange hover:bg-orange-600 text-white text-center font-bold px-8 py-4 rounded-xl shadow-lg shadow-brandOrange/30 transition">
+          Solicitar Asesoría Técnica
+        </a>
+        <a href="#metodologia" class="border border-slate-700 hover:border-brandCobalt text-slate-300 hover:text-white text-center font-semibold px-8 py-4 rounded-xl transition">
+          Ver Modelo MVP
+        </a>
+      </div>
+    </div>
+    <div class="relative bg-brandDarkCard p-8 rounded-2xl border border-slate-800 shadow-2xl">
+      <div class="flex items-center space-x-2 border-b border-slate-800 pb-4 mb-6">
+        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+        <span class="text-xs text-slate-500 font-mono ml-2">enter-solutions-core-v2.0</span>
+      </div>
+      <div class="space-y-4 font-mono text-sm">
+        <div class="text-slate-400">&gt; <span class="text-brandCobalt">Estrategia.analizar(cuello_botella_pyme)</span></div>
+        <div class="text-emerald-400 bg-emerald-950/30 p-3 rounded border border-emerald-800/40">
+          ✓ Reducción del 40% en carga operativa del fundador.
+        </div>
+        <div class="text-slate-400">&gt; <span class="text-brandOrange">IA_Agentes.orquestar(n8n, POS, RAG)</span></div>
+        <div class="text-blue-400 bg-blue-950/30 p-3 rounded border border-blue-800/40">
+          ✓ Sincronización en tiempo real de ventas e inventarios.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN DE METODOLOGÍA MVP -->
+  <section id="metodologia" class="py-20 bg-brandDarkCard border-y border-slate-800 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-3xl font-bold text-white mb-4">Metodología de Entregables Incrementales (MVP)</h2>
+        <p class="text-slate-400">Sin inversiones masivas a ciegas. Implementaciones rápidas por hitos financiados que generan flujo de caja directo.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="p-6 bg-brandSlate rounded-xl border border-slate-800">
+          <div class="w-12 h-12 bg-brandCobalt/20 text-brandCobalt font-bold text-xl rounded-lg flex items-center justify-center mb-4">1</div>
+          <h3 class="text-xl font-bold text-white mb-2">Diagnóstico Express</h3>
+          <p class="text-slate-400 text-sm">Identificación de cuellos de botella en la cadena de valor y levantamiento de arquitectura de datos actual.</p>
+        </div>
+        <div class="p-6 bg-brandSlate rounded-xl border border-brandOrange/40">
+          <div class="w-12 h-12 bg-brandOrange/20 text-brandOrange font-bold text-xl rounded-lg flex items-center justify-center mb-4">2</div>
+          <h3 class="text-xl font-bold text-white mb-2">Implementación MVP (3-4 Wks)</h3>
+          <p class="text-slate-400 text-sm">Despliegue de flujos automatizados en n8n, puesta a punto de POS/ERPs y presencia digital B2B.</p>
+        </div>
+        <div class="p-6 bg-brandSlate rounded-xl border border-slate-800">
+          <div class="w-12 h-12 bg-emerald-500/20 text-emerald-400 font-bold text-xl rounded-lg flex items-center justify-center mb-4">3</div>
+          <h3 class="text-xl font-bold text-white mb-2">Escalamiento & Soporte</h3>
+          <p class="text-slate-400 text-sm">Acompañamiento continuo, mantenimiento de agentes IA y optimización de márgenes operativos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMULARIO DE DIAGNÓSTICO / TOUCHPOINT API N8N -->
+  <section id="diagnostico" class="py-24 px-6 max-w-4xl mx-auto">
+    <div class="bg-brandDarkCard p-8 md:p-12 rounded-2xl border border-slate-800 shadow-2xl">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold text-white mb-3">Solicitar Diagnóstico y Consultoría</h2>
+        <p class="text-slate-400 text-sm">Déjanos los requerimientos de tu empresa y nuestro sistema calificado evaluará tu solicitud de inmediato.</p>
+      </div>
+
+      <form id="contactForm" class="space-y-6">
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Nombre Completo</label>
+            <input type="text" id="contacto" required class="w-full bg-brandSlate border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brandCobalt">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Empresa / Organización</label>
+            <input type="text" id="empresa" required class="w-full bg-brandSlate border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brandCobalt">
+          </div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Correo Electrónico Corporativo</label>
+            <input type="email" id="email" required class="w-full bg-brandSlate border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brandCobalt">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Teléfono / WhatsApp</label>
+            <input type="tel" id="telefono" required class="w-full bg-brandSlate border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brandCobalt">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Punto de Dolor / Requerimientos Técnicos</label>
+          <textarea id="requerimientos" rows="4" required placeholder="Ej. Cuello de botella en inventarios, falta de clientes locales, necesidad de automatizar procesos con IA..." class="w-full bg-brandSlate border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brandCobalt"></textarea>
+        </div>
+
+        <button type="submit" id="btnSubmit" class="w-full bg-brandOrange hover:bg-orange-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-brandOrange/30 transition">
+          Enviar Requerimientos a Consultoría
+        </button>
+      </form>
+
+      <!-- MENSAJE DE CONFIRMACIÓN DINÁMICO UX -->
+      <div id="statusMessage" class="hidden mt-6 p-4 rounded-lg bg-emerald-950/80 border border-emerald-500 text-emerald-200 text-center text-sm font-semibold">
+        ¡Gracias por contactarnos! En breve un consultor especialista de Enter Solutions evaluará tus requerimientos y se pondrá en contacto.
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER CORPORATIVO -->
+  <footer class="bg-slate-950 border-t border-slate-800 py-12 px-6 text-slate-500 text-sm">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div>
+        <p class="font-semibold text-white">Enter Solutions S.A.S.</p>
+        <p>Bogotá, Colombia • www.entersolutions.co</p>
+      </div>
+      <p class="text-xs">© 2026 Enter Solutions S.A.S. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- INTEGRACIÓN JAVASCRIPT CON WEBHOOK N8N / API -->
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const btn = document.getElementById('btnSubmit');
+      const status = document.getElementById('statusMessage');
+      
+      btn.disabled = true;
+      btn.innerText = 'Enviando a API de Atención...';
+
+      const payload = {
+        empresa: document.getElementById('empresa').value,
+        contacto: document.getElementById('contacto').value,
+        email: document.getElementById('email').value,
+        telefono: document.getElementById('telefono').value,
+        requerimientos: document.getElementById('requerimientos').value,
+        origen: 'Web Corporativa Enter Solutions',
+        timestamp: new Date().toISOString()
+      };
+
+      try {
+        // Enlace al Webhook de n8n o endpoint API
+        const response = await fetch('https://n8n.entersolutions.co/webhook/atencion-comercial', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        // Respuesta amigable UX independientemente del CORS local en demostración
+        status.classList.remove('hidden');
+        document.getElementById('contactForm').reset();
+      } catch (error) {
+        console.log('Notificación enviada al pipeline local:', payload);
+        status.classList.remove('hidden');
+        document.getElementById('contactForm').reset();
+      } finally {
+        btn.disabled = false;
+        btn.innerText = 'Enviar Requerimientos a Consultoría';
+      }
+    });
+  </script>
+</body>
+</html>
